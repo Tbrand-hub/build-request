@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Request — Found — 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#111110;--bg-card:#1a1a18;--bg-hover:#212120;
+  --border:rgba(255,255,255,0.06);--border-s:rgba(255,255,255,0.1);
+  --text:#ece8e1;--mid:#a8a29e;--faint:#908880;
+  --warm:#c8956c;--warm-b:#e8b48a;--warm-g:rgba(200,149,108,0.08);
+  --red:#d4726a;--sage:#7d9e82;--sky:#7da4bf;--lilac:#a88cbf;--sand:#bfac8e;
+  --sw:240px;
+  --serif:'Instrument Serif',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{overflow-x:hidden}
+
+/* SIDEBAR */
+.sb{position:fixed;top:0;left:0;width:var(--sw);height:100vh;z-index:50;display:flex;flex-direction:column;justify-content:space-between;padding:3rem 1.5rem 2rem;border-right:1px solid var(--border);background:var(--bg)}
+.sb-logo{font-family:var(--serif);font-size:1.15rem;color:var(--text);letter-spacing:-0.02em}
+.sb-logo em{color:var(--warm);font-style:italic}
+.toc{list-style:none}
+.toc-i{margin-bottom:2px}
+.toc-a{display:flex;align-items:baseline;gap:.65rem;padding:.6rem .7rem;border-radius:5px;text-decoration:none;transition:background .2s}
+.toc-a:hover{background:rgba(255,255,255,0.03)}
+.toc-n{font-family:var(--mono);font-size:.7rem;color:var(--faint);min-width:1.4rem;transition:color .25s}
+.toc-l{font-family:var(--sans);font-size:.82rem;font-weight:400;color:var(--faint);transition:color .25s}
+.toc-i.on .toc-a{background:rgba(200,149,108,0.06)}
+.toc-i.on .toc-n{color:var(--warm)}
+.toc-i.on .toc-l{color:var(--text)}
+.sb-ft{font-family:var(--mono);font-size:.7rem;color:var(--faint);letter-spacing:.06em;text-transform:uppercase}
+
+/* PROGRESS */
+.prog{position:fixed;top:0;left:var(--sw);right:0;height:1px;background:var(--warm);z-index:100;transform-origin:left;transform:scaleX(0)}
+
+/* MAIN */
+.mn{margin-left:var(--sw)}
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 5rem}
+.col{max-width:640px}.col-w{max-width:960px}
+
+/* TYPOGRAPHY */
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.8rem,8vw,7rem);line-height:.95;letter-spacing:-0.03em}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.225rem,4.3vw,3.825rem);line-height:1.1;letter-spacing:-0.02em;margin-bottom:2rem;max-width:16em;text-wrap:balance}
+h2 em{color:var(--warm-b);font-style:italic}
+p{color:var(--mid);margin-bottom:1.4rem;font-weight:300;font-size:.95rem;max-width:600px}
+p:last-child{margin-bottom:0}
+p em{color:var(--text);font-style:italic}
+.tag{font-family:var(--mono);font-size:.975rem;letter-spacing:.14em;text-transform:uppercase;color:var(--warm);margin-bottom:1.8rem;display:inline-block}
+.gap{height:1px;margin:0 5rem;background:var(--border)}
+
+/* HERO */
+#hero{padding-bottom:4rem}
+.hero-sub{font-family:var(--sans);font-weight:300;font-size:clamp(.92rem,1.1vw,1.05rem);color:var(--mid);max-width:540px;margin-top:1.5rem;line-height:1.8}
+.hero-meta{font-family:var(--mono);font-size:.72rem;color:var(--faint);margin-top:3rem;letter-spacing:.04em}
+
+/* TEXTAREA */
+.input-wrap{margin:2rem 0 0;max-width:960px}
+.input-wrap textarea{
+  width:100%;min-height:160px;padding:1.2rem 1.4rem;
+  background:var(--bg-card);border:1px solid var(--border-s);border-radius:4px;
+  color:var(--text);font-family:var(--sans);font-size:.92rem;font-weight:300;line-height:1.7;
+  resize:vertical;transition:border-color .3s,box-shadow .3s;
+  outline:none;
+}
+.input-wrap textarea::placeholder{color:var(--faint);font-style:italic}
+.input-wrap textarea:focus{border-color:rgba(200,149,108,0.4);box-shadow:0 0 0 3px rgba(200,149,108,0.08)}
+.input-hint{font-family:var(--mono);font-size:.7rem;color:var(--faint);margin-top:.6rem;letter-spacing:.04em}
+
+/* EXPORT BUTTON */
+.export-wrap{text-align:center;margin:3rem 0}
+.export-btn{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:1rem 2.4rem;
+  border:1px solid rgba(200,149,108,0.4);border-radius:4px;
+  background:rgba(200,149,108,0.06);
+  color:var(--warm-b);font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;
+  cursor:pointer;transition:all .3s;
+}
+.export-btn:hover{border-color:rgba(200,149,108,0.7);background:rgba(200,149,108,0.12);transform:translateY(-2px);box-shadow:0 4px 20px rgba(200,149,108,0.15)}
+.export-btn:active{transform:translateY(0)}
+.export-btn svg{width:18px;height:18px}
+.export-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* VALIDATION */
+.validation-msg{font-family:var(--mono);font-size:.75rem;color:var(--red);margin-top:1rem;display:none}
+.validation-msg.show{display:block}
+
+/* SUCCESS TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;padding:1rem 1.6rem;background:var(--bg-card);border:1px solid var(--sage);border-radius:4px;color:var(--sage);font-family:var(--mono);font-size:.82rem;letter-spacing:.04em;z-index:200;transform:translateY(120%);opacity:0;transition:all .4s cubic-bezier(.16,1,.3,1)}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.r.v{opacity:1;transform:translateY(0)}
+.r1{transition-delay:.06s}.r2{transition-delay:.12s}.r3{transition-delay:.18s}
+
+@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* THEME TOGGLE */
+.theme-tog{position:fixed;top:1.5rem;right:1.5rem;z-index:200;width:44px;height:44px;border:1px solid var(--border-s);border-radius:50%;background:var(--bg-card);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s,border-color .3s,transform .2s cubic-bezier(.16,1,.3,1)}
+.theme-tog:hover{transform:scale(1.08);border-color:var(--warm)}
+.theme-tog svg{width:18px;height:18px;transition:opacity .3s}
+.theme-tog .ico-dark,.theme-tog .ico-light{position:absolute}
+.theme-tog .ico-dark{color:var(--warm-b)}
+.theme-tog .ico-light{opacity:0;color:var(--warm)}
+[data-theme="light"] .theme-tog .ico-dark{opacity:0}
+[data-theme="light"] .theme-tog .ico-light{opacity:1}
+
+/* LIGHT THEME */
+[data-theme="light"]{
+  --bg:#f5f2ed;--bg-card:#eae7e1;--bg-hover:#dfdcd6;
+  --border:rgba(0,0,0,0.08);--border-s:rgba(0,0,0,0.14);
+  --text:#1a1917;--mid:#5c5650;--faint:#6e6860;
+  --warm:#a06830;--warm-b:#8a5520;--warm-g:rgba(160,104,48,0.08);
+  --red:#b84e46;--sage:#4a7a50;--sky:#3d7a9e;--lilac:#7a5e9e;--sand:#8a7a5e;
+}
+[data-theme="light"] .toc-a:hover{background:rgba(0,0,0,0.04)}
+[data-theme="light"] .toc-i.on .toc-a{background:rgba(160,104,48,0.08)}
+
+/* SKIP LINK */
+.skip-link{position:absolute;top:-100%;left:1rem;z-index:999;padding:.5rem 1rem;background:var(--warm);color:var(--bg);font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-decoration:none;border-radius:0 0 4px 4px;transition:top .2s}
+.skip-link:focus{top:0}
+
+/* FOCUS */
+:focus-visible{outline:2px solid var(--warm);outline-offset:3px;border-radius:3px}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.sb{display:none}.mn{margin-left:0}section{padding:5rem 2rem}.gap{margin:0 2rem}.prog{left:0}}
+@media(max-width:768px){section{padding:4rem 1.5rem}}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<button class="theme-tog" id="themeTog" aria-label="Toggle light/dark theme">
+  <svg class="ico-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 2a7.5 7.5 0 005.5 12.5A7.5 7.5 0 119 2z"/>
+  </svg>
+  <svg class="ico-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+</button>
+
+<aside class="sb">
+  <div class="sb-logo"><em>Build</em></div>
+  <ul class="toc">
+    <li class="toc-i on" data-s="hero"><a href="#hero" class="toc-a"><span class="toc-n">00</span><span class="toc-l">Introduction</span></a></li>
+    <li class="toc-i" data-s="vision"><a href="#vision" class="toc-a"><span class="toc-n">01</span><span class="toc-l">The Vision</span></a></li>
+    <li class="toc-i" data-s="problem"><a href="#problem" class="toc-a"><span class="toc-n">02</span><span class="toc-l">The Problem</span></a></li>
+    <li class="toc-i" data-s="audience"><a href="#audience" class="toc-a"><span class="toc-n">03</span><span class="toc-l">The Audience</span></a></li>
+    <li class="toc-i" data-s="success"><a href="#success" class="toc-a"><span class="toc-n">04</span><span class="toc-l">Success</span></a></li>
+    <li class="toc-i" data-s="inputs"><a href="#inputs" class="toc-a"><span class="toc-n">05</span><span class="toc-l">Inputs & Outputs</span></a></li>
+    <li class="toc-i" data-s="constraints"><a href="#constraints" class="toc-a"><span class="toc-n">06</span><span class="toc-l">Constraints</span></a></li>
+    <li class="toc-i" data-s="steer"><a href="#steer" class="toc-a"><span class="toc-n">07</span><span class="toc-l">Your Steer</span></a></li>
+    <li class="toc-i" data-s="export"><a href="#export" class="toc-a"><span class="toc-n">08</span><span class="toc-l">Export</span></a></li>
+  </ul>
+  <div class="sb-ft">Found / Build Request / 2026</div>
+</aside>
+
+<div class="prog" id="prog"></div>
+
+<main class="mn" id="main-content">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="col">
+    <div class="tag" style="animation:fi .5s ease .2s both">Build Request</div>
+    <h1 style="animation:fi .7s ease .35s both">Build.</h1>
+    <p class="hero-sub" style="animation:fi .7s ease .55s both">You've seen what's possible. Now tell us what you want to build. This brief will give Tom everything he needs to scope, design, and build your system.</p>
+    <div class="hero-meta" style="animation:fi .6s ease .7s both">Eight questions &nbsp;|&nbsp; Takes 10-15 minutes &nbsp;|&nbsp; Exports to markdown</div>
+  </div>
+</section>
+
+<div class="gap"></div>
+
+<!-- 01 — THE VISION -->
+<section id="vision">
+  <div class="col-w">
+    <div class="tag r">01 — The Vision</div>
+    <h2 class="r r1">What do you want to <em>build</em>?</h2>
+    <p class="r r2">Describe the system, tool, or workflow you're imagining. Don't worry about technical details yet — just paint the picture. What does it do? What would it feel like to use it? Think of this as the elevator pitch for your idea.</p>
+    <p class="r r3">Good examples: "A system that monitors competitor pricing daily and alerts me when something changes." "A workflow that takes a client brief and produces a full research pack in 20 minutes." "An agent that drafts personalised outreach for every new lead in our CRM."</p>
+    <div class="input-wrap r">
+      <textarea id="q-vision" placeholder="Describe what you want to build..."></textarea>
+      <div class="input-hint">Be as specific or as broad as you like — we'll refine it together.</div>
+    </div>
+  </div>
+</section>
+
+<div class="gap"></div>
+
+<!-- 02 — THE PROBLEM -->
+<section id="problem">
+  <div class="col-w">
+    <div class="tag r">02 — The Problem</div>
+    <h2 class="r r1">What problem does this <em>solve</em>?</h2>
+    <p class="r r2">Every good system starts with a real problem. What's the pain point today? What takes too long, gets forgotten, or doesn't happen at all because nobody has time? Be honest about what's broken or missing.</p>
+    <p class="r r3">The clearer the problem, the better the solution. "We spend two hours every Monday compiling the same report" is more useful than "reporting could be better."</p>
+    <div class="input-wrap r">
+      <textarea id="q-problem" placeholder="What's the problem you're trying to solve?"></textarea>
+      <div class="input-hint">Think about what triggers the frustration — what happens (or doesn't) that made you think of this.</div>
+    </div>
+  </div>
+</section>
+
+<div class="gap"></div>
+
+<!-- 03 — THE AUDIENCE -->
+<section id="audience">
+  <div class="col-w">
+    <div class="tag r">03 — The Audience</div>
+    <h2 class="r r1">Who is this <em>for</em>?</h2>
+    <p class="r r2">Who will use this day-to-day? Just you, your team, a specific role, or the whole department? Understanding the audience shapes everything: how complex it can be, what format the output takes, and how much context it needs.</p>
+    <p class="r r3">Also think about who benefits indirectly. A system you use might produce output that goes to clients, leadership, or other teams.</p>
+    <div class="input-wrap r">
+      <textarea id="q-audience" placeholder="Who will use this? Who else benefits from the output?"></textarea>
+      <div class="input-hint">Names, roles, or team descriptions all work here.</div>
+    </div>
+  </div>
+</section>
+
+<div class="gap"></div>
+
+<!-- 04 — SUCCESS -->
+<section id="success">
+  <div class="col-w">
+    <div class="tag r">04 — Success</div>
+    <h2 class="r r1">What does <em>done</em> look like?</h2>
+    <p class="r r2">Imagine the system is built and working perfectly. What's different? What can you do now that you couldn't before? How would you know it's actually working? Try to be concrete — "I open Slack on Monday morning and there's a briefing waiting" is better than "it saves time."</p>
+    <p class="r r3">If there's a specific metric (time saved, volume produced, errors avoided), mention it. If not, describe the feeling of the outcome.</p>
+    <div class="input-wrap r">
+      <textarea id="q-success" placeholder="Describe what success looks like when this is running..."></textarea>
+      <div class="input-hint">The more concrete, the better we can design to hit that target.</div>
+    </div>
+  </div>
+</section>
+
+<div class="gap"></div>
+
+<!-- 05 — INPUTS & OUTPUTS -->
+<section id="inputs">
+  <div class="col-w">
+    <div class="tag r">05 — Inputs & Outputs</div>
+    <h2 class="r r1">What goes <em>in</em>, what comes <em>out</em>?</h2>
+    <p class="r r2">Think about the data and information your system needs to work. Does it pull from a specific tool, spreadsheet, CRM, or data source? Does someone need to feed it information manually, or should it find its own?</p>
+    <p class="r r3">Then think about the output. A report? An email draft? A Slack message? A dashboard? A file? How often — daily, weekly, on-demand? What format works best for the people who'll use it?</p>
+    <div class="input-wrap r">
+      <textarea id="q-inputs" placeholder="What data or information does it need? What should it produce, and in what format?"></textarea>
+      <div class="input-hint">Include any specific tools, platforms, or data sources if you know them.</div>
+    </div>
+  </div>
+</section>
+
+<div class="gap"></div>
+
+<!-- 06 — CONSTRAINTS -->
+<section id="constraints">
+  <div class="col-w">
+    <div class="tag r">06 — Constraints</div>
+    <h2 class="r r1">What are the <em>boundaries</em>?</h2>
+    <p class="r r2">Every build has constraints, and naming them early saves time. Is there a deadline? A tool you must use (or can't use)? Data that's sensitive or restricted? Existing systems it needs to work with? A budget for external tools or APIs?</p>
+    <p class="r r3">It's also useful to flag anything political — approvals needed, stakeholders who might push back, or processes you can't change even if they're inefficient.</p>
+    <div class="input-wrap r">
+      <textarea id="q-constraints" placeholder="Timeline, tools, restrictions, sensitivities, approvals needed..."></textarea>
+      <div class="input-hint">No constraint is too small to mention — it's easier to design around them from the start.</div>
+    </div>
+  </div>
+</section>
+
+<div class="gap"></div>
+
+<!-- 07 — YOUR STEER -->
+<section id="steer">
+  <div class="col-w">
+    <div class="tag r">07 — Your Steer</div>
+    <h2 class="r r1">What should we <em>emphasise</em> or <em>avoid</em>?</h2>
+    <p class="r r2">This is your chance to shape the direction. Is there something you definitely want ("it must feel simple") or definitely don't want ("no dashboards — nobody looks at them")? Have you seen something similar that worked well, or something that failed?</p>
+    <p class="r r3">Think of this as the creative brief. Your instincts about what matters are valuable — even if they're just hunches. "I think the output should feel like a colleague briefing me, not a system generating a report" is exactly the kind of steer that makes the difference.</p>
+    <div class="input-wrap r">
+      <textarea id="q-steer" placeholder="What to lean into, what to avoid, any inspiration or examples..."></textarea>
+      <div class="input-hint">Hunches count. If something feels important, write it down.</div>
+    </div>
+  </div>
+</section>
+
+<div class="gap"></div>
+
+<!-- 08 — EXPORT -->
+<section id="export" style="text-align:center;min-height:80vh">
+  <div class="col" style="margin:0 auto">
+    <div class="tag r">08 — Export</div>
+    <h2 class="r r1">Ready to <em>ship</em> it.</h2>
+    <p class="r r2" style="max-width:none;text-align:center">Hit the button below to download your brief as a markdown file. Send it to Tom in Slack and he'll take it from there.</p>
+    <div class="export-wrap r r3">
+      <button class="export-btn" id="exportBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Brief (.md)
+      </button>
+    </div>
+    <div class="validation-msg" id="validationMsg">Please fill in at least the Vision and Problem sections before exporting.</div>
+    <p class="r" style="max-width:none;text-align:center;margin-top:2rem;font-family:var(--mono);font-size:.72rem;color:var(--faint);letter-spacing:.06em">Tom will review your brief and come back with a plan, questions, or a working prototype.</p>
+  </div>
+</section>
+
+<div style="height:8rem"></div>
+
+</main>
+
+<div class="toast" id="toast">Brief downloaded. Send it to Tom in Slack.</div>
+
+<script>
+/* Scroll reveal */
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.r').forEach(el=>ro.observe(el));
+
+/* Progress bar */
+const pb=document.getElementById('prog');
+window.addEventListener('scroll',()=>{const s=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight;pb.style.transform=`scaleX(${s/h})`},{passive:true});
+
+/* Sidebar active tracking */
+const tis=document.querySelectorAll('.toc-i');
+const so=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){tis.forEach(t=>t.classList.remove('on'));const m=document.querySelector(`.toc-i[data-s="${e.target.id}"]`);if(m)m.classList.add('on')}})},{threshold:.2,rootMargin:'-10% 0px -40% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>so.observe(s));
+
+/* Theme toggle */
+const tog=document.getElementById('themeTog');
+const stored=localStorage.getItem('theme');
+if(stored)document.documentElement.setAttribute('data-theme',stored);
+tog.addEventListener('click',()=>{const cur=document.documentElement.getAttribute('data-theme');const next=cur==='light'?'dark':'light';if(next==='dark'){document.documentElement.removeAttribute('data-theme');localStorage.setItem('theme','dark')}else{document.documentElement.setAttribute('data-theme','light');localStorage.setItem('theme','light')}});
+
+/* Export to markdown */
+const exportBtn=document.getElementById('exportBtn');
+const validationMsg=document.getElementById('validationMsg');
+const toast=document.getElementById('toast');
+
+const questions=[
+  {id:'q-vision',heading:'What do you want to build?',section:'The Vision'},
+  {id:'q-problem',heading:'What problem does this solve?',section:'The Problem'},
+  {id:'q-audience',heading:'Who is this for?',section:'The Audience'},
+  {id:'q-success',heading:'What does done look like?',section:'Success'},
+  {id:'q-inputs',heading:'What goes in, what comes out?',section:'Inputs & Outputs'},
+  {id:'q-constraints',heading:'What are the boundaries?',section:'Constraints'},
+  {id:'q-steer',heading:'What should we emphasise or avoid?',section:'Your Steer'},
+];
+
+exportBtn.addEventListener('click',()=>{
+  const vision=document.getElementById('q-vision').value.trim();
+  const problem=document.getElementById('q-problem').value.trim();
+
+  if(!vision||!problem){
+    validationMsg.classList.add('show');
+    return;
+  }
+  validationMsg.classList.remove('show');
+
+  const now=new Date();
+  const date=now.toISOString().split('T')[0];
+  const name=prompt('Your name (for the brief):','');
+
+  let md=`# Build Request\n\n`;
+  md+=`**Submitted by:** ${name||'(not provided)'}\n`;
+  md+=`**Date:** ${date}\n\n---\n\n`;
+
+  questions.forEach(q=>{
+    const val=document.getElementById(q.id).value.trim();
+    if(val){
+      md+=`## ${q.section}\n\n${val}\n\n`;
+    }
+  });
+
+  md+=`---\n\n*Generated from the Found Build Request form.*\n`;
+
+  const blob=new Blob([md],{type:'text/markdown;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  const slug=(name||'brief').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/-$/,'');
+  a.href=url;
+  a.download=`build-request-${slug}-${date}.md`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),4000);
+});
+
+/* Auto-save to localStorage */
+questions.forEach(q=>{
+  const el=document.getElementById(q.id);
+  const saved=localStorage.getItem('br-'+q.id);
+  if(saved)el.value=saved;
+  el.addEventListener('input',()=>{localStorage.setItem('br-'+q.id,el.value)});
+});
+</script>
+
+</body>
+</html>
